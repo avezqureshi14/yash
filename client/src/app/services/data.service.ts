@@ -12,17 +12,17 @@ export class DataService {
   selectProduct: any
   countCartItem: any
   // searchValue=new BehaviorSubject('')
-  
-  orderList:any
-  inLoginUser=new BehaviorSubject(false)
+
+  orderList: any
+  inLoginUser = new BehaviorSubject(false)
 
   constructor(private rest: RestApiService) {
-   
-    
+
+
 
   }
   async getProfile() {
-    const profileData: any = await this.rest.get('http://localhost:3000/api/user/profile')
+    const profileData: any = await this.rest.get('https://yash-knbl.onrender.com/api/user/profile')
     console.log("data", profileData.user);
     this.inLoginUser.next(true)
 
@@ -34,45 +34,45 @@ export class DataService {
     item["user"] = this.loginUserDetails._id
 
 
-    const data: any = await this.rest.post("http://localhost:3000/api/user/addcart", item)
+    const data: any = await this.rest.post("https://yash-knbl.onrender.com/api/user/addcart", item)
     console.log("set", data);
 
   }
 
 
   async getSingleProduct(item: any) {
-    const data: any = await this.rest.get(`http://localhost:3000/api/user/singleproduct/${item}`)
+    const data: any = await this.rest.get(`https://yash-knbl.onrender.com/api/user/singleproduct/${item}`)
 
     this.selectProduct = data.data
-    console.log("a",this.selectProduct);
+    console.log("a", this.selectProduct);
 
   }
 
-  async addOrder(item:any){
+  async addOrder(item: any) {
 
-     
+
     // for(let i=0;i<item.length;i++){
-      const data:any =await this.rest.post('http://localhost:3000/api/user/order',item)
-      console.log("order post ",data);
-      
+    const data: any = await this.rest.post('https://yash-knbl.onrender.com/api/user/order', item)
+    console.log("order post ", data);
+
 
     // }
-   
+
   }
 
 
-  async getOrders(){
-    try{
-     const data:any= await this.rest.get(`http://localhost:3000/api/user/vieworders/${this.loginUserDetails._id}`)
+  async getOrders() {
+    try {
+      const data: any = await this.rest.get(`https://yash-knbl.onrender.com/api/user/vieworders/${this.loginUserDetails._id}`)
 
-     this.orderList =data.orders
-     console.log("order",this.orderList);
-     
-     
+      this.orderList = data.orders
+      console.log("order", this.orderList);
 
-    }catch(error){
+
+
+    } catch (error) {
       console.log(error);
-      
+
     }
 
   }

@@ -8,20 +8,20 @@ import { RestApiService } from './services/rest-api.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent   {
+export class AppComponent {
 
   checkstring: String = "user"
   istoken: Boolean = false
-  count:any;
+  count: any;
 
   constructor(public data: DataService, public router: Router, private rest: RestApiService) {
 
     this.data.getProfile()
     // setTimeout(()=>{
-      this.cartCount()
+    this.cartCount()
     // },1600)
     // this.cartCount()
-   
+
 
 
     if (localStorage.getItem("token")) {
@@ -41,7 +41,7 @@ export class AppComponent   {
     // this.cartCount()
   }
 
-  
+
 
 
   logout() {
@@ -58,13 +58,13 @@ export class AppComponent   {
 
   }
   async cartCount() {
-     await this.data.getProfile()
+    await this.data.getProfile()
     console.log("inside cartcount");
     console.log("jhjj", this.data.loginUserDetails);
 
-    const data: any = await this.rest.get(`http://localhost:3000/api/user/viewcart/${this.data.loginUserDetails._id}`)
+    const data: any = await this.rest.get(`https://yash-knbl.onrender.com/api/user/viewcart/${this.data.loginUserDetails._id}`)
     console.log("ffffffffff", data);
-     this.count=data.data.length
+    this.count = data.data.length
 
   }
 
@@ -76,10 +76,10 @@ export class AppComponent   {
 
   // typeValue(){
   //   console.log("value typed",this.searchValue);
-    
+
   //   this.data.searchValue.next(this.searchValue)
   //   console.log(this.data.searchValue);
-    
+
   // }
 
 

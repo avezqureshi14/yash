@@ -7,33 +7,33 @@ import { RestApiService } from 'src/app/services/rest-api.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  usersList:any
-  constructor(private rest:RestApiService) { }
- 
+  usersList: any
+  constructor(private rest: RestApiService) { }
+
   ngOnInit(): void {
     this.viewUsers()
   }
 
-  async viewUsers(){
-    try{
-     const users:any=await this.rest.get('http://localhost:3000/api/admin/viewUsers')
-     console.log("users",users);
-     this.usersList=users.users
-     
-    }catch(error){
+  async viewUsers() {
+    try {
+      const users: any = await this.rest.get('https://yash-knbl.onrender.com/api/admin/viewUsers')
+      console.log("users", users);
+      this.usersList = users.users
+
+    } catch (error) {
       console.log(error);
-      
+
     }
-       
+
   }
 
 
-  async deleteUser(id:any){
-    if(confirm(`are you sure to delete ${id}  of user`)){
-      await this.rest.delete(`http://localhost:3000/api/admin/deleteuser/${id}`)
+  async deleteUser(id: any) {
+    if (confirm(`are you sure to delete ${id}  of user`)) {
+      await this.rest.delete(`https://yash-knbl.onrender.com/api/admin/deleteuser/${id}`)
       this.viewUsers()
     }
-   
+
   }
 
 }

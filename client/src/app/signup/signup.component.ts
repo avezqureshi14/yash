@@ -11,44 +11,44 @@ import { RestApiService } from '../services/rest-api.service';
 })
 export class SignupComponent implements OnInit {
   RegForm: any = this.fb.group({
-    name: ['',[Validators.required]],
-    email: ['',[Validators.required]],
-    cpassword: ['',[Validators.required,Validators.minLength(6)]],
-    password: ['',[Validators.required,Validators.minLength(6)]],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    cpassword: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
 
   })
 
-  constructor(private fb: FormBuilder, private rest: RestApiService,private router:Router) { }
+  constructor(private fb: FormBuilder, private rest: RestApiService, private router: Router) { }
 
   async register() {
     console.log("reg");
 
     try {
-      if(this.RegForm.value.cpassword==this.RegForm.value.password){
-        const data = await this.rest.post('http://localhost:3000/api/user/signup', this.RegForm.value)
+      if (this.RegForm.value.cpassword == this.RegForm.value.password) {
+        const data = await this.rest.post('https://yash-knbl.onrender.com/api/user/signup', this.RegForm.value)
         console.log(data);
 
         this.RegForm.reset()
         this.router.navigateByUrl('signin')
 
       }
-     
-      
+
+
     } catch (error) {
       console.log(error);
 
     }
-  
-    
+
+
 
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       this.router.navigateByUrl('user-dashboard')
     }
     console.log(this.RegForm);
-    
+
   }
 
 }

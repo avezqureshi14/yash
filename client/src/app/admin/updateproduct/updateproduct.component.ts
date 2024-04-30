@@ -9,54 +9,54 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./updateproduct.component.css']
 })
 export class UpdateproductComponent implements OnInit {
-EditFurnitures: any = this.fb.group({
+  EditFurnitures: any = this.fb.group({
     title: [''],
     description: [''],
     category: [''],
     image: [''],
     status: [''],
     prize: [''],
-   
+
 
   })
-  updateid:any
+  updateid: any
 
-  constructor(private fb:FormBuilder,private router:ActivatedRoute,private rest:RestApiService) { }
+  constructor(private fb: FormBuilder, private router: ActivatedRoute, private rest: RestApiService) { }
 
   ngOnInit(): void {
-    this.router.params.subscribe((params)=>{
-      this.updateid=params['id']
+    this.router.params.subscribe((params) => {
+      this.updateid = params['id']
       this.getDetails(params['id'])
-      
+
     })
   }
 
- async getDetails(id:any){
-  console.log("get",id);
-  
+  async getDetails(id: any) {
+    console.log("get", id);
 
-    const data:any=await this.rest.get(`http://localhost:3000/api/admin/getproduct/${id}`)
-    console.log("id details",data.data);
+
+    const data: any = await this.rest.get(`https://yash-knbl.onrender.com/api/admin/getproduct/${id}`)
+    console.log("id details", data.data);
     this.EditFurnitures.patchValue(data.data)
-    
-      
+
+
   }
 
 
-  async editFurnitures(){
-   console.log("iddd",this.updateid);
-   console.log(this.EditFurnitures.value);
-   
-   
-     
-      const data:any=await this.rest.put(`http://localhost:3000/api/admin/updateproduct/${this.updateid}`,this.EditFurnitures.value)
-      console.log("final",data);
-      
-    
- 
- 
+  async editFurnitures() {
+    console.log("iddd", this.updateid);
+    console.log(this.EditFurnitures.value);
+
+
+
+    const data: any = await this.rest.put(`https://yash-knbl.onrender.com/api/admin/updateproduct/${this.updateid}`, this.EditFurnitures.value)
+    console.log("final", data);
+
+
+
+
     console.log(this.EditFurnitures.value)
-      //  const data:any=await this.rest.update
+    //  const data:any=await this.rest.update
 
   }
 

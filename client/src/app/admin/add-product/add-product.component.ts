@@ -17,33 +17,33 @@ export class AddProductComponent implements OnInit {
     image: [''],
     status: [''],
     prize: [''],
-   
+
 
   })
 
-  constructor(private fb:FormBuilder,private rest:RestApiService,private router:Router) { }
+  constructor(private fb: FormBuilder, private rest: RestApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  async addFurnitures(){
-  
-    
-    try{
-      console.log("adddddddddddd",this.AddFurnitures);
-    
-      const data:any=await this.rest.post("http://localhost:3000/api/admin/addProduct",this.AddFurnitures.value)
-    
-      if(data['success']){
+  async addFurnitures() {
+
+
+    try {
+      console.log("adddddddddddd", this.AddFurnitures);
+
+      const data: any = await this.rest.post("https://yash-knbl.onrender.com/api/admin/addProduct", this.AddFurnitures.value)
+
+      if (data['success']) {
         this.router.navigateByUrl('admin/products')
       }
 
-    }catch(error){
+    } catch (error) {
       console.log(error);
-      
+
     }
-  
-      
+
+
   }
 
 

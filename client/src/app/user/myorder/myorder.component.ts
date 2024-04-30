@@ -31,7 +31,7 @@ export class MyorderComponent implements OnInit {
     for (let i = 0; i <= this.data.orderList.length; i++) {
       console.log(this.data.orderList[i].productid);
 
-      const result: any = await this.rest.get(`http://localhost:3000/api/user/vieworderproduct/${this.data.orderList[i].productid[i]}`)
+      const result: any = await this.rest.get(`https://yash-knbl.onrender.com/api/user/vieworderproduct/${this.data.orderList[i].productid[i]}`)
       console.log("result", result.data);
       this.orderProduct = result.data[i]
 
@@ -45,16 +45,16 @@ export class MyorderComponent implements OnInit {
   async cancelOrder(id: any) {
     if (confirm("Are you sure to cancel this order")) {
       try {
-        await this.rest.delete(`http://localhost:3000/api/user/cancelorder/${id}`)
+        await this.rest.delete(`https://yash-knbl.onrender.com/api/user/cancelorder/${id}`)
         this.getOrders()
-  
+
       } catch (error) {
         console.log(error);
-  
+
       }
 
     }
-   
+
   }
 
 }

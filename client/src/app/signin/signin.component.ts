@@ -14,17 +14,17 @@ export class SigninComponent implements OnInit {
 
   LoginForm: any = this.fb.group({
 
-    email: ['',[Validators.required,Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
 
-    password: ['',[Validators.required,Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
 
   })
-  constructor(private fb: FormBuilder, private rest: RestApiService,private router:Router,private dataS:DataService) { }
+  constructor(private fb: FormBuilder, private rest: RestApiService, private router: Router, private dataS: DataService) { }
 
   ngOnInit(): void {
     console.log(this.LoginForm);
-    
-    if(localStorage.getItem("token")){
+
+    if (localStorage.getItem("token")) {
       this.router.navigateByUrl('user-dashboard')
     }
   }
@@ -35,20 +35,20 @@ export class SigninComponent implements OnInit {
 
     try {
 
-      const data:any= await this.rest.post('http://localhost:3000/api/user/signin', this.LoginForm.value)
+      const data: any = await this.rest.post('https://yash-knbl.onrender.com/api/user/signin', this.LoginForm.value)
       console.log("kfdj", data);
-      if(data['success'] ){
-        if(data['user'].role =='user'){
-          localStorage.setItem("token",data["token"])
+      if (data['success']) {
+        if (data['user'].role == 'user') {
+          localStorage.setItem("token", data["token"])
           await this.dataS.getProfile()
-         this.router.navigateByUrl('user-dashboard')
-        }else if(data['user'].role =='admin'){
-          localStorage.setItem("token",data["token"])
+          this.router.navigateByUrl('user-dashboard')
+        } else if (data['user'].role == 'admin') {
+          localStorage.setItem("token", data["token"])
           await this.dataS.getProfile()
-      
+
           this.router.navigateByUrl('admin-dashboard')
         }
-        
+
       }
 
 
