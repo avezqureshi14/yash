@@ -13,7 +13,7 @@ mongoose.connect('mongodb+srv://phoenixworld786:yash@cluster0.bruunke.mongodb.ne
 
 
 app.use(express.json())
-app.use(cors({ origin: 'http://localhost:4200' }))
+app.use(cors())
 
 //rotings
 
